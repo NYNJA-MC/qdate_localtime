@@ -9,18 +9,18 @@
 -include("tz_index.hrl").
 
 -export(
-  [
-     utc_to_local/2
-     ,local_to_utc/2
-     ,local_to_local/3
-     ,local_to_local_dst/3
-     ,tz_name/2
-     ,tz_shift/2
-     ,tz_shift/3
-     ,get_timezone/1
-     ,list_timezones/0
-     ,adjust_datetime/2
-     ,fmt_shift/1
+  [ utc_to_local/2
+  , local_to_utc/2
+  , local_to_local/3
+  , local_to_local_dst/3
+  , tz_name/2
+  , tz_shift/2
+  , tz_shift/3
+  , get_timezone/1
+  , list_timezones/0
+  , adjust_datetime/2
+  , fmt_shift/1
+  , all_timezones/0
   ]).
 
 % utc_to_local(UtcDateTime, Timezone) -> LocalDateTime | [LocalDateTime, DstLocalDateTime] | {error, ErrDescr}
@@ -198,6 +198,9 @@ get_timezone(TimeZone) ->
 
 list_timezones() ->
     dict:fetch_keys(?tz_index).
+
+all_timezones() ->
+    [ TZ || {TZ, _, _, _, _, _, _, _, _} <- ?tz_database ].
 
 % =======================================================================
 % privates
